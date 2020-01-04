@@ -32,13 +32,15 @@ function getCategories(token) {
 
 var firstTry = true;
 
-function getProducts(token, offset = 0) {
+function getProducts(token, limit = 1, offset = 0) {
   $.ajax({
     crossDomain: true,
     url:
-      "https://api.bukalapak.com/products?assurance=false&category_id=" +
+      "https://api.bukalapak.com/products?brand=true&category_id=" +
       (queryParams.category_id || "") +
-      "&original=true&condition=new&limit=50&offset=" +
+      "&original=true&condition=new&limit=" +
+      limit +
+      "&offset=" +
       offset +
       "&rating=4%3A5&sort=date&top_seller=true&access_token=" +
       token,
@@ -52,8 +54,10 @@ function getProducts(token, offset = 0) {
           selectedOffset = parseInt(Math.random() * (total - 50));
         }
 
-        getProducts(token, selectedOffset);
+        getProducts(token, 50, selectedOffset);
       } else {
+        $("html,body").scrollTop(0);
+
         const products = data.data;
         let randomizedIndex = parseInt(Math.random() * products.length);
         let product = products[randomizedIndex];
