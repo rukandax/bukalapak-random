@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bukalapak Random Product</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="utils.js"></script>
+  </head>
+  <body>
+    <div id="product-container">
+      <div id="product-card">
+        <div id="product-image" style="min-height: 200px;">
+          <a href="" target="_blank" rel="noopener noreferrer">
+            <img src="" />
+          </a>
+        </div>
+        <div id="product-content">
+          <div id="product-title">
+            <a href="#" target="_blank" rel="noopener noreferrer">
+              Loading Product Title
+            </a>
+          </div>
+          <div id="product-price">
+            Loading Product Price
+          </div>
+        </div>
+        <div id="product-footer">
+          <a href="" target="_blank" rel="noopener noreferrer">
+            Buy Now
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="product-next">
+      <a href="#" onclick="event.preventDefault();location.reload()">
+        Surprise Me!!!
+      </a>
+    </div>
+    <div id="product-filter">
+      <div id="toggle-filter-category">Toggle Category Filter</div>
+      <div id="product-filter-category" hidden>
+        <div class="product-filter-category-item">
+          <input
+            type="radio"
+            name="category"
+            value="-1"
+            onclick="window.location = window.location.pathname"
+            checked="checked"
+            id="radio--1"
+          />
+          <label for="radio--1">Semua Kategori</label>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
