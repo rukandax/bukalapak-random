@@ -44,6 +44,9 @@ function getProducts(token, limit = 1, offset = 0) {
       offset +
       "&rating=4%3A5&sort=date&top_seller=true&access_token=" +
       token,
+    error: function() {
+      getToken();
+    },
     success: function(data) {
       if (firstTry) {
         firstTry = false;
@@ -112,6 +115,7 @@ function getProducts(token, limit = 1, offset = 0) {
   });
 }
 
+let tryAttemp = 1;
 function getToken() {
   $.ajax({
     crossDomain: true,
@@ -120,6 +124,8 @@ function getToken() {
       const token = data.split('access_token:"')[1].split('"')[0];
 
       if (token) {
+        setCookie("token", token);
+
         getCategories(token);
         getProducts(token);
       } else if (tryAttemp <= 3) {
@@ -130,4 +136,9 @@ function getToken() {
   });
 }
 
-getToken();
+if (!getCookie("token") || getCookie("token").length <= 0) {
+  getToken();
+} else {
+  getCategories(getCookie("token"));
+  getProducts(getCookie("token"));
+}
