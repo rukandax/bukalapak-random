@@ -11,7 +11,10 @@ $("#toggle-filter-category").on("click", function() {
 function getCategories(token) {
   $.ajax({
     crossDomain: true,
-    url: "https://api.bukalapak.com/categories?access_token=" + token,
+    url:
+      location.protocol +
+      "//api.bukalapak.com/categories?access_token=" +
+      token,
     success: function(data) {
       data.data.forEach(category => {
         let selected = "";
@@ -31,12 +34,14 @@ function getCategories(token) {
 }
 
 var firstTry = true;
+var connectAttemp = 1;
 
 function getProducts(token, limit = 1, offset = 0) {
   $.ajax({
     crossDomain: true,
     url:
-      "https://api.bukalapak.com/products?brand=true&category_id=" +
+      location.protocol +
+      "//api.bukalapak.com/products?brand=true&category_id=" +
       (queryParams.category_id || "") +
       "&original=true&condition=new&limit=" +
       limit +
@@ -45,7 +50,12 @@ function getProducts(token, limit = 1, offset = 0) {
       "&rating=3%3A5&sort=date&top_seller=true&access_token=" +
       token,
     error: function() {
-      getToken();
+      if (connectAttemp <= 3) {
+        connectAttemp += 1;
+        getToken();
+      } else {
+        alert("Request cancelled by server. Please try again later.");
+      }
     },
     success: function(data) {
       if (firstTry) {
@@ -71,7 +81,7 @@ function getProducts(token, limit = 1, offset = 0) {
 
         const lastItem = JSON.parse(getCookie("last-item"));
 
-        while (lastItem.includes(product.sku_id)) {
+        while (lastItem.includes(product.sku_id.toString())) {
           randomizedIndex = parseInt(Math.random() * products.length);
           product = products[randomizedIndex];
         }
@@ -80,7 +90,7 @@ function getProducts(token, limit = 1, offset = 0) {
           lastItem.shift();
         }
 
-        lastItem.push(product.sku_id);
+        lastItem.push(product.sku_id.toString());
         setCookie("last-item", JSON.stringify(lastItem));
 
         if (getCookie("last-title").length <= 0) {
@@ -102,7 +112,8 @@ function getProducts(token, limit = 1, offset = 0) {
         setCookie("last-title", JSON.stringify(lastTitle));
 
         const productUrl =
-          "https://bukalapak.go2cloud.org/aff_c?offer_id=15&aff_id=7049&url=" +
+          location.protocol +
+          "//bukalapak.go2cloud.org/aff_c?offer_id=15&aff_id=7049&url=" +
           encodeURIComponent(
             product.url +
               "?ho_offer_id={offer_id}&ho_trx_id={transaction_id}&affiliate_id={affiliate_id}&utm_source=hasoffers&utm_medium=affiliate&utm_campaign={offer_id}&ref={referer}"
@@ -130,11 +141,15 @@ function getProducts(token, limit = 1, offset = 0) {
   });
 }
 
-let tryAttemp = 1;
+var tryAttemp = 1;
 function getToken() {
   $.ajax({
     crossDomain: true,
-    url: "https://cors-anywhere.herokuapp.com/https://m.bukalapak.com",
+    url:
+      location.protocol +
+      "//cors-anywhere.herokuapp.com/" +
+      location.protocol +
+      "//m.bukalapak.com",
     success: function(data) {
       const token = data.split('access_token:"')[1].split('"')[0];
 
