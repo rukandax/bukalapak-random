@@ -76,12 +76,30 @@ function getProducts(token, limit = 1, offset = 0) {
           product = products[randomizedIndex];
         }
 
-        if (lastItem.length >= 25) {
+        if (lastItem.length >= 40) {
           lastItem.shift();
         }
 
         lastItem.push(product.sku_id);
         setCookie("last-item", JSON.stringify(lastItem));
+
+        if (getCookie("last-title").length <= 0) {
+          setCookie("last-title", "[]");
+        }
+
+        const lastTitle = JSON.parse(getCookie("last-title"));
+
+        while (lastTitle.includes(product.name.toLowerCase())) {
+          randomizedIndex = parseInt(Math.random() * products.length);
+          product = products[randomizedIndex];
+        }
+
+        if (lastTitle.length >= 40) {
+          lastTitle.shift();
+        }
+
+        lastTitle.push(product.name.toLowerCase());
+        setCookie("last-title", JSON.stringify(lastTitle));
 
         const productUrl =
           "https://bukalapak.go2cloud.org/aff_c?offer_id=15&aff_id=7049&url=" +
