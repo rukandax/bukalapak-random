@@ -42,7 +42,7 @@ function getProducts(token, limit = 1, offset = 0) {
       limit +
       "&offset=" +
       offset +
-      "&rating=4%3A5&sort=date&top_seller=true&access_token=" +
+      "&rating=3%3A5&sort=date&top_seller=true&access_token=" +
       token,
     error: function() {
       getToken();
