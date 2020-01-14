@@ -90,15 +90,19 @@ function getProducts(token, limit = 1, offset = 0) {
               "?ho_offer_id={offer_id}&ho_trx_id={transaction_id}&affiliate_id={affiliate_id}&utm_source=hasoffers&utm_medium=affiliate&utm_campaign={offer_id}&ref={referer}"
           );
 
+        $("#product-image").attr("style", "");
         $("#product-image img").attr("src", product.images.large_urls[0]);
+        $("#product-image alt").attr("src", product.name);
+
         $("#product-image a").attr("href", productUrl);
         $("#product-title a").attr("href", productUrl);
         $("#product-title a").text(product.name);
+
         $("#product-price").text(
           "Rp " + product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         );
+
         $("#product-footer a").attr("href", productUrl);
-        $("#product-image").attr("style", "");
 
         console.log(`Collected Products Length : ${products.length}`);
         console.log(`Total Products Length : ${data.meta.total}`);
