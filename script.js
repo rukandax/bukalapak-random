@@ -83,13 +83,12 @@ function getProducts(token, limit = 1, offset = 0) {
         lastItem.push(product.sku_id);
         setCookie("last-item", JSON.stringify(lastItem));
 
-        const productUrl = mobileCheck()
-          ? product.url
-          : "https://bukalapak.go2cloud.org/aff_c?offer_id=15&aff_id=7049&url=" +
-            encodeURIComponent(
-              product.url +
-                "?ho_offer_id={offer_id}&ho_trx_id={transaction_id}&affiliate_id={affiliate_id}&utm_source=hasoffers&utm_medium=affiliate&utm_campaign={offer_id}&ref={referer}"
-            );
+        const productUrl =
+          "https://bukalapak.go2cloud.org/aff_c?offer_id=15&aff_id=7049&url=" +
+          encodeURIComponent(
+            product.url +
+              "?ho_offer_id={offer_id}&ho_trx_id={transaction_id}&affiliate_id={affiliate_id}&utm_source=hasoffers&utm_medium=affiliate&utm_campaign={offer_id}&ref={referer}"
+          );
 
         $("#product-image img").attr("src", product.images.large_urls[0]);
         $("#product-image a").attr("href", productUrl);
@@ -98,12 +97,7 @@ function getProducts(token, limit = 1, offset = 0) {
         $("#product-price").text(
           "Rp " + product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         );
-        $("#product-footer a").attr(
-          "href",
-          mobileCheck()
-            ? "https://bl.id/bayar/" + product.sku_id.toString(36)
-            : productUrl
-        );
+        $("#product-footer a").attr("href", productUrl);
         $("#product-image").attr("style", "");
 
         console.log(`Collected Products Length : ${products.length}`);
