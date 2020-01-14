@@ -92,7 +92,7 @@ function getProducts(token, limit = 1, offset = 0) {
 
         $("#product-image").attr("style", "width: 100%;");
         $("#product-image img").attr("src", product.images.large_urls[0]);
-        $("#product-image alt").attr("src", product.name);
+        $("#product-image img").attr("alt", product.name);
 
         $("#product-image a").attr("href", productUrl);
         $("#product-title a").attr("href", productUrl);
