@@ -90,7 +90,7 @@ function getProducts(token, limit = 1, offset = 0) {
               "?ho_offer_id={offer_id}&ho_trx_id={transaction_id}&affiliate_id={affiliate_id}&utm_source=hasoffers&utm_medium=affiliate&utm_campaign={offer_id}&ref={referer}"
           );
 
-        $("#product-image").attr("style", "");
+        $("#product-image").attr("style", "width: 100%;");
         $("#product-image img").attr("src", product.images.large_urls[0]);
         $("#product-image alt").attr("src", product.name);
 
