@@ -111,26 +111,21 @@ function getProducts(token, limit = 1, offset = 0) {
         lastTitle.push(product.name.toLowerCase());
         setCookie("last-title", JSON.stringify(lastTitle));
 
-        const productUrl =
-          location.protocol +
-          "//bukalapak.go2cloud.org/aff_c?offer_id=15&aff_id=7049&url=" +
-          encodeURIComponent(
-            product.url +
-              "?ho_offer_id={offer_id}&ho_trx_id={transaction_id}&affiliate_id={affiliate_id}&utm_source=hasoffers&utm_medium=affiliate&utm_campaign={offer_id}&ref={referer}"
-          );
-
         $("#product-image img").attr("src", product.images.large_urls[0]);
         $("#product-image img").attr("alt", product.name);
 
-        $("#product-image a").attr("href", productUrl);
-        $("#product-title a").attr("href", productUrl);
+        $("#product-image a").attr("href", product.url);
+        $("#product-title a").attr("href", product.url);
         $("#product-title a").text(product.name);
 
         $("#product-price").text(
           "Rp " + product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         );
 
-        $("#product-footer a").attr("href", productUrl);
+        $("#product-footer a").attr(
+          "href",
+          "https://bl.id/bayar/" + product.sku_id.toString(36)
+        );
 
         console.log(`Collected Products Length : ${products.length}`);
         console.log(`Total Products Length : ${data.meta.total}`);
