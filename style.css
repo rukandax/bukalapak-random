@@ -85,11 +85,11 @@ body {
 
 #product-filter {
   font-size: 13px;
-  padding: 0 25px;
+  padding: 25px;
   box-sizing: border-box;
   width: 100%;
   max-width: 450px;
-  margin: 25px auto;
+  margin: auto;
 }
 
 #toggle-filter-category {

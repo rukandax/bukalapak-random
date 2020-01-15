@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bukalapak Random Product - Made by Rukanda</title>
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="https://madeby.rukanda.xyz/bukalapak-random/logo.png"
-    />
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
     <meta content="notranslate" name="google" />
     <meta
       name="description"
@@ -28,10 +24,7 @@
       property="og:description"
       content="Website untuk menemukan berbagai barang menarik secara acak yang bisa langsung Anda beli di Bukalapak."
     />
-    <meta
-      content="https://madeby.rukanda.xyz/bukalapak-random/logo.png"
-      property="og:image"
-    />
+    <meta content="logo.png" property="og:image" />
     <link href="https://madeby.rukanda.xyz/bukalapak-random/" rel="canonical" />
     <script type="application/ld+json">
       {
@@ -61,6 +54,21 @@
 
       gtag("config", "UA-91775573-2");
     </script>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Bukalapak Random" />
+    <link rel="apple-touch-icon" href="logo.png" />
+    <meta name="theme-color" content="#c30f42" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("service-worker.js").then(reg => {
+            console.log("Service worker registered.", reg);
+          });
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="product-container">
@@ -68,7 +76,7 @@
         <div id="product-image">
           <a href="" target="_blank" rel="noopener noreferrer">
             <img
-              src="https://via.placeholder.com/400x200"
+              src="placeholder.jpg"
               alt="Loading Random Bukalapak Product Image"
             />
           </a>
