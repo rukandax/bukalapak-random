@@ -118,7 +118,7 @@ function getProducts(token, limit = 1, offset = 0) {
 
         $("#product-image a").attr(
           "onclick",
-          `gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Product Image', 'value': '${product.url}' });`
+          "gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Product Image' });"
         );
 
         $("#product-title a").attr("href", product.url);
@@ -126,7 +126,7 @@ function getProducts(token, limit = 1, offset = 0) {
 
         $("#product-title a").attr(
           "onclick",
-          `gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Product Title', 'value': '${product.url}' });`
+          "gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Product Title' });"
         );
 
         $("#product-price").text(
@@ -140,10 +140,13 @@ function getProducts(token, limit = 1, offset = 0) {
 
         $("#product-footer a").attr(
           "onclick",
-          `gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Buy Now', 'value': 'https://bl.id/bayar/${product.sku_id.toString(
-            36
-          )}' });`
+          "gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Buy Now' });"
         );
+
+        gtag("event", "load", {
+          event_category: "pageview",
+          event_label: "Get Product"
+        });
 
         console.log(`Collected Products Length : ${products.length}`);
         console.log(`Total Products Length : ${data.meta.total}`);

@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "202001161258";
+const CACHE_NAME = "202001161854";
 
 const FILES_TO_CACHE = [
   "offline.html",
