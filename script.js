@@ -115,8 +115,19 @@ function getProducts(token, limit = 1, offset = 0) {
         $("#product-image img").attr("alt", product.name);
 
         $("#product-image a").attr("href", product.url);
+
+        $("#product-image a").attr(
+          "onclick",
+          `gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Product Image', 'value': '${product.url}' });`
+        );
+
         $("#product-title a").attr("href", product.url);
         $("#product-title a").text(product.name);
+
+        $("#product-title a").attr(
+          "onclick",
+          `gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Product Title', 'value': '${product.url}' });`
+        );
 
         $("#product-price").text(
           "Rp " + product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -125,6 +136,13 @@ function getProducts(token, limit = 1, offset = 0) {
         $("#product-footer a").attr(
           "href",
           "https://bl.id/bayar/" + product.sku_id.toString(36)
+        );
+
+        $("#product-footer a").attr(
+          "onclick",
+          `gtag('event', 'click', { 'event_category': 'cta', 'event_label': 'Buy Now', 'value': 'https://bl.id/bayar/${product.sku_id.toString(
+            36
+          )}' });`
         );
 
         console.log(`Collected Products Length : ${products.length}`);
