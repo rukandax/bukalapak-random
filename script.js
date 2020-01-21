@@ -43,11 +43,11 @@ function getProducts(token, limit = 1, offset = 0) {
       location.protocol +
       "//api.bukalapak.com/products?brand=true&category_id=" +
       (queryParams.category_id || "") +
-      "&original=true&condition=new&limit=" +
+      "&condition=new&limit=" +
       limit +
       "&offset=" +
       offset +
-      "&rating=3%3A5&sort=date&top_seller=true&access_token=" +
+      "&rating=4%3A5&sort=date&top_seller=true&access_token=" +
       token,
     error: function() {
       if (connectAttemp <= 3) {
